@@ -21,7 +21,7 @@ public struct MimeType {
     ///  checker function to `matches` property
     ///
     ///  - parameter bytes: Bytes represented with `[UInt8]`
-    ///  - parameter swime: Swime instance
+    ///  - parameter filetype: FileType instance
     ///
     ///  - returns: Bool
     public func matches(bytes: [UInt8], filetype: FileType) -> Bool {

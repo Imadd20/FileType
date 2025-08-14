@@ -22,7 +22,7 @@ public struct FileType {
       return mimeType(filetype: FileType(data: data))
     }
     
-    ///  Get the `MimeType` that matches the given `Swime` instance
+    ///  Get the `MimeType` that matches the given `MimeType` instance
     ///
     ///  - returns: Optional<MimeType>
     static public func mimeType(filetype: FileType) -> MimeType? {
