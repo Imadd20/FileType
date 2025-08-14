@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "start": "node generate.js"
+  },
+  "type": "module",
+  "dependencies": {
+    "file-type": "^21.0.0"
+  }
+}

@@ -5,17 +5,23 @@ import PackageDescription
 
 let package = Package(
     name: "FileType",
+    platforms: [
+      .iOS(.v12),
+      .macOS(.v10_13)
+    ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "FileType",
-            targets: ["FileType"]),
+            targets: ["FileType"]
+        ),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "FileType"),
+            name: "FileType"
+        ),
         .testTarget(
             name: "FileTypeTests",
             dependencies: ["FileType"]
