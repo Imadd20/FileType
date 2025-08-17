@@ -136,17 +136,15 @@ lines.push('');
 // lines.push('])');
 // lines.push('');
 
+let mimeDB = Object.keys(db).filter(m => db[m].extensions && db[m].extensions.length > 0);
+console.log("Found", mimeDB.length, "MimeType extensions");
 
-console.log("Found", Object.keys(db).filter(m => db[m].extensions && db[m].extensions.length > 0).length, "MimeType extensions");
-
-lines.push(`/// ${Object.keys(db).length}`);
+lines.push(`/// ${mimeDB.length}`);
 lines.push('public extension MimeType {');
 lines.push('    nonisolated(unsafe) static let mimeTypes: [String: MimeTypeData] = [');
-Object.keys(db).forEach(mime => {
+mimeDB.forEach(mime => {
   const data = db[mime];
-  if (data.extensions && data.extensions.length > 0) {
   lines.push(`        "${mime}": .init(compressible: ${data.compressible ?? "nil"}, extensions: ${JSON.stringify(data.extensions)}),`);
-  }
 });
 lines.push('    ]');
 lines.push('}');

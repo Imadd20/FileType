@@ -2,7 +2,7 @@
 // Supported.swift
 // Auto-generated, do not edit manually
 //
-//   Created by wong on 3:33:13 AM 8/18/2025.
+//   Created by wong on 3:48:08 AM 8/18/2025.
 //   https://www.npmjs.com/package/file-type
 //
 
@@ -188,7 +188,7 @@ public enum Extensions: String, CaseIterable, Identifiable {
     case zst = "zst"
 }
 
-/// 2522
+/// 1015
 public extension MimeType {
     nonisolated(unsafe) static let mimeTypes: [String: MimeTypeData] = [
         "application/andrew-inset": .init(compressible: nil, extensions: ["ez"]),
