@@ -5,6 +5,7 @@ import { supportedExtensions, supportedMimeTypes } from 'file-type';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import db from 'mime-db';
 import { mimeToData } from './mapping.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -127,13 +128,30 @@ allExtensions.forEach(ext => {
 lines.push('}');
 lines.push('');
 
-lines.push(`/// ${mimeArray.length}`);
-lines.push('public let mimeTypes: Set<String> = Set([');
-mimeArray.forEach(mime => {
-  lines.push(`    "${mime}",`);
+// lines.push(`/// ${mimeArray.length}`);
+// lines.push('public let mimeTypes: Set<String> = Set([');
+// mimeArray.forEach(mime => {
+//   lines.push(`    "${mime}",`);
+// });
+// lines.push('])');
+// lines.push('');
+
+
+console.log("Found", Object.keys(db).filter(m => db[m].extensions && db[m].extensions.length > 0).length, "MimeType extensions");
+
+lines.push(`/// ${Object.keys(db).length}`);
+lines.push('public extension MimeType {');
+lines.push('    nonisolated(unsafe) static let mimeTypes: [String: MimeTypeData] = [');
+Object.keys(db).forEach(mime => {
+  const data = db[mime];
+  if (data.extensions && data.extensions.length > 0) {
+  lines.push(`        "${mime}": .init(compressible: ${data.compressible ?? "nil"}, extensions: ${JSON.stringify(data.extensions)}),`);
+  }
 });
-lines.push('])');
+lines.push('    ]');
+lines.push('}');
 lines.push('');
+
 
 lines.push('public extension MimeType {');
 lines.push('    nonisolated(unsafe) static let mimeTypesAll: [MimeType] = [');
@@ -142,10 +160,7 @@ mimeArray.forEach(mime => {
   const caseName = toSwiftCaseName(ext);
   const magicNumber = mimeToData[mime].magicNumber;
   const bytesCount = mimeToData[mime].bytesCount;
-  
-  
   lines.push(`        .init(mime: "${mime}", type: .${caseName}, bytesCount: ${bytesCount}, matches: { bytes, _ in`);
-  
   if (magicNumber && magicNumber.length > 0) {
     lines.push(`           return ${magicNumber.join(' && ')}`);
   } else {
@@ -158,6 +173,7 @@ mimeArray.forEach(mime => {
 lines.push('    ]');
 lines.push('}');
 lines.push('');
+
 
 // Write to file
 fs.writeFileSync(destFile, lines.join('\n'));

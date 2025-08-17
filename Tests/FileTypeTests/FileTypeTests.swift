@@ -3,14 +3,13 @@ import Testing
 import Foundation
 
 @Test func testMimeTypesSet() async throws {
-    #expect(mimeTypes.contains("application/pdf"))
-    #expect(mimeTypes.contains("image/png"))
-    #expect(mimeTypes.contains("image/jpeg"))
-    #expect(mimeTypes.contains("image/gif"))
-    #expect(!mimeTypes.contains("unknown/type"))
+    #expect(MimeType.mimeTypes.contains(where: {  $0.key == "application/pdf" }))
+    #expect(MimeType.mimeTypes.contains(where: {  $0.key == "image/png" }))
+    #expect(MimeType.mimeTypes.contains(where: {  $0.key == "image/jpeg" }))
+    #expect(MimeType.mimeTypes.contains(where: {  $0.key == "image/gif" }))
     
     // Test that the set has a reasonable number of entries
-    #expect(mimeTypes.count > 100)
+    #expect(MimeType.mimeTypes.count == 1015)
 }
 
 

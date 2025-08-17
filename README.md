@@ -86,12 +86,21 @@ if let avroMimeType = avroMimeType {
 }
 ```
 
+```swift
+let mimeTypes = MimeType.mimeTypes.first(where: { $0.key == "application/mp4" })
+if let mimeTypes = mimeTypes {
+    mimeTypes.compressible
+    mimeTypes.extensions // ["mp4","mpg4","mp4s","m4p"]
+}
+```
+
 ## Acknowledgments
 
 Thanks to these projects:
 
 - https://github.com/sendyhalim/Swime
 - https://github.com/sindresorhus/file-type
+- https://github.com/jshttp/mime-db
 
 ## License
 

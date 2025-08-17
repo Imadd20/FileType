@@ -28,3 +28,8 @@ public struct MimeType {
       return bytes.count >= bytesCount && matches(bytes, filetype)
     }
 }
+
+public struct MimeTypeData: Codable {
+    public let compressible: Bool?
+    public let extensions: [String]
+}

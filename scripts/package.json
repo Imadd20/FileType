@@ -4,6 +4,7 @@
   },
   "type": "module",
   "dependencies": {
-    "file-type": "^21.0.0"
+    "file-type": "^21.0.0",
+    "mime-db": "^1.54.0"
   }
 }
